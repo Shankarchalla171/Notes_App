@@ -6,7 +6,7 @@ import { Card } from "../components/Card";
 
 const Archive=()=>{
     const {notes}=useContext(notesContext);
-    let archived=notes.filter((note)=>note.isArchived===true);
+    let archived=notes.filter((note)=>note.isArchived===true && note.bin===false);
     return (
         <>
            <Navbar/>
