@@ -13,7 +13,7 @@ function noteReducer(state,action){
       case 'add':{
         return {
             ...state,
-            notes:[...state.notes,{title:state.title,text:state.text,id:uuid(),isPinned:false}],
+            notes:[...state.notes,{title:state.title,text:state.text,id:uuid(),isPinned:false,isArchived:false}],
             title:"",
             text:''
         };
@@ -25,7 +25,14 @@ function noteReducer(state,action){
             notes:state.notes.map((note)=>note.id===action.payload ?{...note,isPinned:!note.isPinned}:note),
          }
       }
+      case "archive":{
+         return {
+            ...state,
+            notes:state.notes.map((note)=>note.id===action.payload?{...note,isArchived:!note.isArchived}:note),
+         }
+      }
       default:
+      
        return state;
    }
 }
