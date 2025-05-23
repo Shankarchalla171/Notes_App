@@ -23,8 +23,8 @@ const Home = () => {
         dispatch({ type: "add" })
     }
     console.log(notes);
-    const Pinned = notes.filter((note) => note.isPinned === true);
-    const Other = notes.filter((note) => note.isPinned === false);
+    const Pinned = notes.filter((note) => note.isPinned === true && note.isArchived===false);
+    const Other = notes.filter((note) => note.isPinned === false && note.isArchived===false);
     console.log(`pinned:` ,Pinned)
     console.log(`other:`, Other);
     return (
@@ -48,8 +48,8 @@ const Home = () => {
                                 <h2 className="ml-4">Pinned Notes:</h2>
                                 <section className="flex gap-[30px] p-3">
                                     {
-                                         Pinned.map(({ title, text, id, ispinned }) => (
-                                            <Card title={title} text={text} id={id} isPinned={ispinned}/>
+                                         Pinned.map((note) => (
+                                            <Card note={note} />
                                         ))
                                     }
                                 </section>
@@ -59,8 +59,8 @@ const Home = () => {
                             {Pinned.length > 0 && <h2 className="ml-4">Other Notes:</h2>}
                             <section className="flex gap-[30px] p-3">
                                 {
-                                    Other.map(({ title, text, id, ispinned }) => (
-                                        <Card title={title} text={text} id={id} isPinned={ispinned} />
+                                    Other.map((note) => (
+                                        <Card note={note}/>
                                     ))
                                 }
                             </section>
