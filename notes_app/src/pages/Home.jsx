@@ -23,8 +23,8 @@ const Home = () => {
         dispatch({ type: "add" })
     }
     console.log(notes);
-    const Pinned = notes.filter((note) => note.isPinned === true && note.isArchived===false);
-    const Other = notes.filter((note) => note.isPinned === false && note.isArchived===false);
+    const Pinned = notes.filter((note) => note.isPinned === true && note.isArchived===false && note.bin===false);
+    const Other = notes.filter((note) => note.isPinned === false && note.isArchived===false && note.bin===false);
     console.log(`pinned:` ,Pinned)
     console.log(`other:`, Other);
     return (
@@ -32,7 +32,7 @@ const Home = () => {
             <Navbar />
             <main className="flex">
                 <SideBar />
-                <section className="w-[100%] bg-amber-200">
+                <section className="w-[100%] bg-amber-200 ">
                     <section className=" flex justify-center h-[30%] mt-6">
                         <div className="flex flex-col bg-red-50 w-[30%]  p-3 h-[100%] relative rounded-2xl">
                             <input type="text" onChange={onTitleChange} value={title} placeholder="Enter Title" className="h-[20%] focus:outline-none capitalize" />
@@ -55,9 +55,9 @@ const Home = () => {
                                 </section>
                             </>
                         }
-                        <section className="mt-3">
+                        <section className="mt-3 w-[100%]">
                             {Pinned.length > 0 && <h2 className="ml-4">Other Notes:</h2>}
-                            <section className="flex gap-[30px] p-3">
+                            <section className="flex flex-wrap gap-[30px] p-3">
                                 {
                                     Other.map((note) => (
                                         <Card note={note}/>

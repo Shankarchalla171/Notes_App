@@ -13,7 +13,7 @@ function noteReducer(state,action){
       case 'add':{
         return {
             ...state,
-            notes:[...state.notes,{title:state.title,text:state.text,id:uuid(),isPinned:false,isArchived:false}],
+            notes:[...state.notes,{title:state.title,text:state.text,id:uuid(),isPinned:false,isArchived:false,bin:false}],
             title:"",
             text:''
         };
@@ -29,6 +29,18 @@ function noteReducer(state,action){
          return {
             ...state,
             notes:state.notes.map((note)=>note.id===action.payload?{...note,isArchived:!note.isArchived}:note),
+         }
+      }
+      case "delete":{
+         return {
+            ...state,
+            notes:state.notes.map((note)=>note.id===action.payload?{...note,bin:!note.bin,isPinned:false,isArchived:false}:note)
+         }
+      }
+      case "remove":{
+         return {
+            ...state,
+            notes:state.notes.filter((note)=>note.id !== action.payload),
          }
       }
       default:
